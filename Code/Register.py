@@ -53,12 +53,14 @@ def generate_random_password(length=12):
             return password
 
 def register_user():
-    username = input("Enter your username: ")
-    
-    if is_username_taken(username):
-        print("This username already exists. Please choose another username.")
-        return  
-    
+    while True:
+        username = input("Enter your username: ")
+
+        if is_username_taken(username):
+            print("This username already exists. Please choose another username.")
+        else:
+            break  # Break the loop if username is available
+
     attempts = 0
     while attempts < 3:
         password = getpass.getpass("Enter your password: ")  
@@ -69,18 +71,44 @@ def register_user():
             break
     
     if attempts == 3:
-        # Generate a random password after 3 failed attempts
-        print("You have failed to provide a valid password 3 times. A random password will be generated for you.")
-        password = generate_random_password()
-        print(f"Your new password is: {password}")
+        # After 3 failed attempts, ask if they want to generate a password or continue typing
+        print("You have failed to provide a valid password 3 times.")
+        print("!Warning: Auto-Generate password cannot be changed!!!")
+        choice = input("Do you want to (1) auto-generate a random password or (2) continue typing your own password? Enter 1 or 2: ")
+        
+        if choice == '1':
+            # Generate a random password
+            password = generate_random_password()
+            print(f"Your new password is: {password}")
+        elif choice == '2':
+            # Allow them to try again
+            print("You can continue typing your own password.")
+            attempts = 0
+            while attempts < 3: 
+                password = getpass.getpass("Enter your password: ")  
+                if not validate_password(password):
+                    print("Password is not strong enough. Try again.")
+                    attempts += 1
+                else:
+                    break
+            if attempts == 3:
+                print("You have failed to provide a valid password again. A random password will be generated for you.")
+                password = generate_random_password()
+                print(f"Your new password is: {password}")
+        else:
+            print("Invalid choice. A random password will be generated for you.")
+            password = generate_random_password()
+            print(f"Your new password is: {password}")
 
     # Confirm password
     while True:
         confirm_password = getpass.getpass("Confirm your password: ")
         if password != confirm_password:
             print("Passwords do not match. Please try again.")
-        else:
-            break 
+            # Prompt the user to re-enter the original password if confirmation fails
+            password = getpass.getpass("Enter your password: ")  
+            continue
+        break 
 
     while True:
         pin = getpass.getpass("Enter your 4-digit secret PIN: ")  # Use getpass for PIN
