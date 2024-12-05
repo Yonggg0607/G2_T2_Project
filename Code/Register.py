@@ -1,10 +1,12 @@
 import hashlib
 import getpass
+import random
+import string
 
 def hash_password(password):
     sha256_hash = hashlib.sha256()
     sha256_hash.update(password.encode('utf-8'))  
-    return sha256_hash.hexdigest()  
+    return sha256_hash.hexdigest()
 
 def hash_pin(pin):
     sha256_hash = hashlib.sha256()
@@ -33,7 +35,6 @@ def validate_pin(pin):
     return True
 
 def is_username_taken(username):
-    # Check if the username already exists in the UserInfo.txt file
     try:
         with open("UserInfo.txt", "r") as file:
             lines = file.readlines()
@@ -44,27 +45,43 @@ def is_username_taken(username):
         return False  # If the file doesn't exist, the username is not taken
     return False
 
+def generate_random_password(length=12):
+    """Generate a random password with at least one uppercase letter, one digit, and one lowercase letter."""
+    while True:
+        password = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+        if any(char.isdigit() for char in password) and any(char.isupper() for char in password) and any(char.islower() for char in password):
+            return password
+
 def register_user():
     username = input("Enter your username: ")
     
-    # Check if the username already exists
     if is_username_taken(username):
-        print("This username is already exist. Please choose another username.")
-        return  # Exit the registration process if username is already taken
+        print("This username already exists. Please choose another username.")
+        return  
     
-    while True:
+    attempts = 0
+    while attempts < 3:
         password = getpass.getpass("Enter your password: ")  
         if not validate_password(password):
             print("Password is not strong enough. Try again.")
+            attempts += 1
         else:
             break
+    
+    if attempts == 3:
+        # Generate a random password after 3 failed attempts
+        print("You have failed to provide a valid password 3 times. A random password will be generated for you.")
+        password = generate_random_password()
+        print(f"Your new password is: {password}")
+
+    # Confirm password
     while True:
         confirm_password = getpass.getpass("Confirm your password: ")
         if password != confirm_password:
             print("Passwords do not match. Please try again.")
         else:
             break 
-        
+
     while True:
         pin = getpass.getpass("Enter your 4-digit secret PIN: ")  # Use getpass for PIN
         if not validate_pin(pin):
@@ -72,7 +89,6 @@ def register_user():
         else:
             break 
     
-    # Hash both password and PIN
     hashed_password = hash_password(password)
     hashed_pin = hash_pin(pin)
     
