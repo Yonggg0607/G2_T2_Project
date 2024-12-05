@@ -11,7 +11,7 @@ def hash_password(password):
 def hash_pin(pin):
     sha256_hash = hashlib.sha256()
     sha256_hash.update(pin.encode('utf-8'))
-    return sha256_hash.hexdigest()  # Hash the PIN
+    return sha256_hash.hexdigest() 
 
 def validate_password(password):
     if len(password) < 6:
@@ -125,7 +125,19 @@ def register_user():
         file.write(f"Password (hashed): {hashed_password}\n")
         file.write(f"Secret PIN (hashed): {hashed_pin}\n")
         file.write("\n")
-    
     print("Registration successful!")
+def main():
+    while True:
+        print("1. Register\n2. Login\n3. Exit")
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            register_user()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice.")
 
-register_user()
+if __name__ == "__main__":
+    main()
+   
+
