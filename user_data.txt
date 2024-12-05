@@ -1,4 +1,0 @@
-Username: yong
-Password (hashed): ea18ef42547ca3d4e3ca66951a94b2c1faceee1f5bb7cbbdd599dc7d263891c3
-Secret PIN: 1234
-
