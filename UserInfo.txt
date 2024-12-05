@@ -38,3 +38,7 @@ Username: nhabi
 Password (hashed): ea18ef42547ca3d4e3ca66951a94b2c1faceee1f5bb7cbbdd599dc7d263891c3
 Secret PIN (hashed): 03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4
 
+Username: panha
+Password (hashed): 78c2e28c60e47ee1d71bd3336b063d059721e8f251061525b6f8a6edd0a0b72a
+Secret PIN (hashed): 03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4
+

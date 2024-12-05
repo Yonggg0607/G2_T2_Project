@@ -116,7 +116,7 @@ def register_user():
             print("Invalid PIN. Please enter a 4-digit number.")
         else:
             break 
-    
+
     hashed_password = hash_password(password)
     hashed_pin = hash_pin(pin)
     
