@@ -62,3 +62,11 @@ Username: test1
 Password (hashed): ea18ef42547ca3d4e3ca66951a94b2c1faceee1f5bb7cbbdd599dc7d263891c3
 Secret PIN (hashed): 03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4
 
+Username: fong
+Password (hashed): 4e7e9c01ae336637e441ee2ea188f4c1416e24f524a291dfa4309a6d94d4f29c
+Secret PIN (hashed): 03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4
+
+Username: Meeng
+Password (hashed): 4e7e9c01ae336637e441ee2ea188f4c1416e24f524a291dfa4309a6d94d4f29c
+Secret PIN (hashed): 03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4
+
